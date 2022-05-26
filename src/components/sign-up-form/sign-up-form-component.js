@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
+import { UserContext } from "../../context/user-context";
+
 import FormInput from "../form-input/form-input-component";
-import './sign-up-form-styles.scss';
 import Button from "../button/button-component";
+
+import './sign-up-form-styles.scss';
+
+
 
 const defaultFormFields = {
     displayName: '',
@@ -11,10 +16,12 @@ const defaultFormFields = {
     confirmPassword: ''
 }
 
-const SignUpForm = (props) => {
+const SignUpForm = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
+
+    
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -33,9 +40,9 @@ const SignUpForm = (props) => {
             return;
         }
         try {
-            const response = await createAuthUserWithEmailAndPassword(email, password);
+            const {user} = await createAuthUserWithEmailAndPassword(email, password);
             console.log('account created');
-            const userDocRef = await createUserDocumentFromAuth({ ...response.user, displayName: displayName });
+            const userDocRef = await createUserDocumentFromAuth({ ...user, displayName });
             resetFormFields();
 
         } catch (error) {
@@ -45,6 +52,7 @@ const SignUpForm = (props) => {
     }
 
     return (
+
         <div className="sign-up-container">
             <h2>Don't have an account?</h2>
             <span>Sign up with your email and password</span>
@@ -81,7 +89,7 @@ const SignUpForm = (props) => {
                     name={'confirmPassword'}
                     required
                 />
-                <Button title='Submit'  />
+                <Button title='Submit' />
             </form>
         </div>
     )

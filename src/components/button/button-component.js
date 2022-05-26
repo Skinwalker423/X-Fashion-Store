@@ -7,9 +7,9 @@ const BUTTON_THEME = {
 }
 
 
-const Button = ({title, theme}) => {
+const Button = ({title, theme, onClickHandler}) => {
     return (
-        <button className={`button-container ${BUTTON_THEME[theme]}`}>{title}</button>
+        <button onClick={onClickHandler} className={`button-container ${BUTTON_THEME[theme]}`}>{title}</button>
     )
 }
 

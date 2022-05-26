@@ -1,12 +1,14 @@
 .sign-up-container{
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 380px;
+    margin-left: 50px;
 }
 
 @media (max-width: 500px) {
     .sign-up-container{
-        width: 100%;
+        width: auto;
+        margin: 50px;
     }
 }
 

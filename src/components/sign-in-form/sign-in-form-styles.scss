@@ -1,0 +1,15 @@
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
+
+}
+
+.sign-in-container {
+    margin-right: 50px;
+    width: 380px;
+}
