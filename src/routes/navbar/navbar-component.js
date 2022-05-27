@@ -1,24 +1,21 @@
-import React, {Fragment, useContext, useEffect} from "react";
+import React, {Fragment, useContext} from "react";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import { auth, signOutUser } from "../../utils/firebase/firebase-utils";
-
-
+import { signOutUser } from "../../utils/firebase/firebase-utils";
 import { UserContext } from "../../context/user-context";
+import { CartDropdownContext } from "../../context/cart-dropdown-context";
 
-import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
+import CartIcon from "../../components/cart-icon/cart-icon-component";
 import './navbar-styles.scss';
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown-component";
 
 
 
 const NavBar = () => {
     const {currentUser} = useContext(UserContext);
+    const {cartDropdownDisplayed} = useContext(CartDropdownContext);
 
-    // useEffect(() => {
-    //     console.log(currentUser)
-    // }, [currentUser])
-
-    const logOffAuthUser = async(e) => {
+    const logOffAuthUser = async() => {
 
             try{
                 await signOutUser();
@@ -32,7 +29,6 @@ const NavBar = () => {
     const authenticate = () => {
 
         if(currentUser){
-            console.log(currentUser)
             return(
                 <span onClick={logOffAuthUser} className='nav-link'>Log Out</span>
             )
@@ -49,15 +45,15 @@ const NavBar = () => {
             <nav className="navigation">
                 <Link className="logo-container" to={'/'} >
                     {/* <CrownLogo className='logo' /> */}
-                    <img src="../logo192.png" width={'50px'} />
+                    <img src="../logo192.png" width={'50px'} alt='react logo' />
                 </Link>
 
                 <div className="nav-links-container">
                     <Link className='nav-link' to={'/shop'}>Shop</Link>
-                    <Link className='nav-link' to={'/'}>Contact</Link>
                     {authenticate()}
-                    <Link className='nav-link' to={'/'}>cart</Link>
+                    <CartIcon />
                 </div>
+            {cartDropdownDisplayed && <CartDropdown />}
             </nav>
             <Outlet />
         </Fragment>
