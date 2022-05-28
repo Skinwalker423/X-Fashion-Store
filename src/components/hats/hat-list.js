@@ -8,17 +8,11 @@ const Hats = () => {
 
     const {products} = useContext(ProductsContext);
 
-    const hatList = products.map(({name, imageUrl, price, id}) =>{
+    const hatList = products.map((product) =>{
         return(
             <ProductCard 
-                products={
-                    {
-                    name,
-                    imageUrl,
-                    price
-                    }
-                }
-                key={id}
+                products={product}
+                key={product.id}
             />
         )
 });
