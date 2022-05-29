@@ -45,7 +45,7 @@ const NavBar = () => {
             <nav className="navigation">
                 <Link className="logo-container" to={'/'} >
                     {/* <CrownLogo className='logo' /> */}
-                    <img src="../logo192.png" width={'50px'} alt='react logo' />
+                    <img src="../logo192.png" width={'25px'} alt='react logo' />
                 </Link>
 
                 <div className="nav-links-container">

@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import { ProductsContext } from "../../context/products-context";
-import ProductCard from "../card/product-card-component";
+import ProductCard from "../products-card/product-card-component";
 
-import '../card/products-card-styles.scss';
+import '../products-card/products-card-styles.scss';
 
 const Hats = () => {
 
