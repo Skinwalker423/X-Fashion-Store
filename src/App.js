@@ -7,6 +7,7 @@ import Checkout from "./routes/checkout/checkout-component";
 
 
 
+
 const App = () => {
 
   return (
@@ -14,16 +15,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<NavBar />} >
           <Route index element={<Home />} />
-          <Route path="shop" element={<Shop />} />
+          <Route path="shop/*" element={<Shop />} />
           <Route path="auth" element={<Authorization />} />
           <Route path="logout" element={<Home />} />
           <Route path="checkout" element={<Checkout />} />
         </Route>
-        <Route path="/products/hats" element={<Home/>} />
-        <Route path="/products/jackets" element={<Home/>} />
-        <Route path="/products/sneakers" element={<Home/>} />
-        <Route path="/products/womens" element={<Home/>} />
-        <Route path="/products/hats" element={<Home/>} />
       </Routes>
     </div>
   );
