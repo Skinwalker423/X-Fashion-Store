@@ -1,13 +1,13 @@
 import React, {Fragment, useContext} from "react";
-import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { signOutUser } from "../../utils/firebase/firebase-utils";
 import { UserContext } from "../../context/user-context";
 import { CartDropdownContext } from "../../context/cart-dropdown-context";
 
+import { NavbarContainer, NavLinkContainer, LogoContainer, NavLink, span } from "./navbar-styles";
 import CartIcon from "../../components/cart-icon/cart-icon-component";
-import './navbar-styles.scss';
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown-component";
+
 
 
 
@@ -27,34 +27,32 @@ const NavBar = () => {
 
 
     const authenticate = () => {
-
         if(currentUser){
             return(
-                <span onClick={logOffAuthUser} className='nav-link'>Log Out</span>
+                <NavLink as='span' onClick={logOffAuthUser}>Log Out</NavLink>
             )
         }
-
         return(
-                <Link className='nav-link' to={'/auth'}>Sign In</Link>
+                <NavLink to={'/auth'}>Sign In</NavLink>
             )
     } 
     
 
     return(
         <Fragment>
-            <nav className="navigation">
-                <Link className="logo-container" to={'/'} >
+            <NavbarContainer>
+                <LogoContainer to={'/'} >
                     {/* <CrownLogo className='logo' /> */}
                     <img src="../logo192.png" width={'25px'} alt='react logo' />
-                </Link>
+                </LogoContainer>
 
-                <div className="nav-links-container">
-                    <Link className='nav-link' to={'/shop'}>Shop</Link>
+                <NavLinkContainer>
+                    <NavLink to={'/shop'}>Shop</NavLink>
                     {authenticate()}
                     <CartIcon />
-                </div>
+                </NavLinkContainer>
             {cartDropdownDisplayed && <CartDropdown />}
-            </nav>
+            </NavbarContainer>
             <Outlet />
         </Fragment>
     )

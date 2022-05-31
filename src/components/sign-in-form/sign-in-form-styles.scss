@@ -1,15 +1,14 @@
-.buttons-container {
-    display: flex;
-    justify-content: space-between;
 
+.sign-in-container {
+    width: 500px;
 
-    @media (max-width: 500px) {
-        flex-direction: column;
+    @media (max-width: 700px) {
+        width: 100%;
+    
     }
 
 }
 
-.sign-in-container {
-    margin-right: 50px;
-    width: 380px;
+.buttons-container{
+    display: flex;
 }

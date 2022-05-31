@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import { auth, signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase-utils";
 import { GoogleAuthProvider } from "firebase/auth";
 
-
 import FormInput from "../form-input/form-input-component";
-import Button from "../button/button-component";
+import Button, {BUTTON_THEME} from "../button/button-component";
+
 
 import './sign-in-form-styles.scss';
 
@@ -70,7 +70,7 @@ const SignInForm = () => {
                 />
                 <div className="buttons-container">
                     <Button type='submit' title={'Sign in with Email'} />
-                    <Button type='button' title={'Sign in with Google'} onClickHandler={logInGoogleUser} theme={'google'} />
+                    <Button type='button' title={'Sign in with Google'} onClickHandler={logInGoogleUser} theme={BUTTON_THEME.google} />
                 </div>  
             </form>
     )
