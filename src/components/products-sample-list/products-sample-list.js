@@ -4,7 +4,7 @@ import ProductCard from "../products-card/product-card-component";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-import '../products-card/products-card-styles.scss';
+import { CategoriesSampleContainer, ProductTitle, ProductsContainer } from "./products-sample-list-styles";
 
 const ProductsSampleList = () => {
 
@@ -13,9 +13,9 @@ const ProductsSampleList = () => {
     const products = Object.keys(categoriesMap).map((title) => {
         return(
 
-        <div className="categories-sample-container" key={title}>
-            <Link to={title}><h2 className="product-title">{title}</h2></Link>
-            <div className="products-container">
+        <CategoriesSampleContainer key={title}>
+            <Link to={title}><ProductTitle>{title}</ProductTitle></Link>
+            <ProductsContainer>
                 {categoriesMap[title].map((item, index) =>{
                     if(index >= 4){
                         return null;
@@ -29,8 +29,8 @@ const ProductsSampleList = () => {
                         />
                         )
                     })}
-            </div>
-        </div>
+            </ProductsContainer>
+        </CategoriesSampleContainer>
         )
     })
 

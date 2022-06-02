@@ -24,7 +24,7 @@ const Button = ({title, theme, onClickHandler}) => {
     const CustomButton = getButton(theme);
 
     return (
-        <CustomButton onClick={onClickHandler} className={`button-container ${BUTTON_THEME[theme]}`}>{title}</CustomButton>
+        <CustomButton onClick={onClickHandler}>{title}</CustomButton>
     )
 }
 

@@ -1,17 +1,17 @@
 import React from "react";
 import CategoryCard from "../category-item/category-card";
-import './directory-styles.scss';
+import { CategoriesContainer } from "./directory-styles";
 
 
 const Directory = ({categories}) => {
 
     return(
-        <div className="categories-container">
+        <CategoriesContainer className="categories-container">
         {categories.map(({id, imageUrl, title}) => 
             (
                 <CategoryCard category={title} imageUrl={imageUrl} key={id} />
             ))}
-        </div>
+        </CategoriesContainer>
         )
     }
 

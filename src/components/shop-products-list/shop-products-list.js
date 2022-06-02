@@ -1,10 +1,8 @@
-import './shop-products-list-styles.scss';
+import { ShopCategoryListContainer, CategoryTitle, CatProdCont } from "./shop-products-list-styles";
 import React, {useContext, useState, useEffect} from "react";
 import { CategoriesContext } from '../../context/categories-context';
 import ProductCard from '../products-card/product-card-component';
 
-
-import '../products-card/products-card-styles.scss';
 
 const ShopCategoryList = ({category}) => {
 
@@ -16,19 +14,19 @@ const ShopCategoryList = ({category}) => {
     }, [products, categoriesMap])
 
         return(
-            <div className='shop-category-list-container'>
-            <h1 className='product-title'>{category}</h1>
-            <div className="products-container">
-                {products && products.map((item) =>{
-                    return(
-                        <ProductCard 
-                        products={item}
-                        key={item.id}
-                        />
-                        )
-                    })}
-            </div>
-            </div>
+            <ShopCategoryListContainer>
+                <CategoryTitle>{category}</CategoryTitle>
+                <CatProdCont>
+                    {products && products.map((item) =>{
+                        return(
+                            <ProductCard 
+                            products={item}
+                            key={item.id}
+                            />
+                            )
+                        })}
+                </CatProdCont>
+            </ShopCategoryListContainer>
         )
 
 }

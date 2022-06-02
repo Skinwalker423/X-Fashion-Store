@@ -5,8 +5,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import FormInput from "../form-input/form-input-component";
 import Button, {BUTTON_THEME} from "../button/button-component";
 
-
-import './sign-in-form-styles.scss';
+import { SignInFormContainer, ButtonsContainer } from "./sign-in-form-styles";
 
 
 const defaultSignInFormFields = {
@@ -49,7 +48,7 @@ const SignInForm = () => {
     }
 
     return(
-        <form onSubmit={onFormSubmit} className="sign-in-container">
+        <SignInFormContainer onSubmit={onFormSubmit}>
                 <h2>Already have an account?</h2>
                 <span>Sign In</span>
                 <FormInput
@@ -68,11 +67,11 @@ const SignInForm = () => {
                     name={'password'}
                     required
                 />
-                <div className="buttons-container">
+                <ButtonsContainer>
                     <Button type='submit' title={'Sign in with Email'} />
                     <Button type='button' title={'Sign in with Google'} onClickHandler={logInGoogleUser} theme={BUTTON_THEME.google} />
-                </div>  
-            </form>
+                </ButtonsContainer>  
+            </SignInFormContainer>
     )
 }
 

@@ -1,10 +1,10 @@
 import React from "react";
-import Button from "../button/button-component";
+import Button, {BUTTON_THEME} from "../button/button-component";
 import { useContext } from "react";
 import { CartDropdownContext } from "../../context/cart-dropdown-context";
 import { Link } from "react-router-dom";
+import { ProductCardContainer, Name, Price, Footer } from "./products-card-styles.jsx";
 
-import './products-card-styles.scss';
 
 const ProductCard = ({ products, id, category }) => {
 
@@ -21,14 +21,14 @@ const ProductCard = ({ products, id, category }) => {
     }
 
     return (
-        <div className="product-card-container" >
+        <ProductCardContainer >
             <Link to={`/shop/${category}/${id}`}><img src={imageUrl} alt={name} /></Link>
-            <div className="footer">
-                <h2 className="name">{name}</h2>
-                <p className="price">${price}</p>
-            </div>
-            <Button title={'buy'} theme='inverted' onClickHandler={addProductToCart}  />                           
-        </div>
+            <Footer>
+                <Name>{name}</Name>
+                <Price>${price}</Price>
+            </Footer>
+            <Button title={'buy'} theme={BUTTON_THEME.inverted} onClickHandler={addProductToCart}  />                           
+        </ProductCardContainer>
     )
 }
 

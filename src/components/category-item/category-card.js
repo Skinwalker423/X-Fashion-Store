@@ -1,16 +1,16 @@
 import React from "react";
-import './category-card-styles.scss';
+import { CategoryContainer, CategoryBody, BackgroundImage } from "./category-card-styles";
 
 const CategoryCard = ({ imageUrl, category}) => {
 
     return (
-        <div className="category-container">
-            <div className="background-image" style={{backgroundImage: `url(${imageUrl})`}} />
-            <div className="category-body-container">
+        <CategoryContainer>
+            <BackgroundImage imageUrl={imageUrl} />
+            <CategoryBody>
                 <h2>{category}</h2>
                 <p>Browse Now!</p>
-            </div>
-        </div>
+            </CategoryBody>
+        </CategoryContainer>
     )
 }
 

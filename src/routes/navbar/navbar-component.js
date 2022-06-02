@@ -4,7 +4,7 @@ import { signOutUser } from "../../utils/firebase/firebase-utils";
 import { UserContext } from "../../context/user-context";
 import { CartDropdownContext } from "../../context/cart-dropdown-context";
 
-import { NavbarContainer, NavLinkContainer, LogoContainer, NavLink, span } from "./navbar-styles";
+import { NavbarContainer, NavLinkContainer, LogoContainer, NavLink } from "./navbar-styles";
 import CartIcon from "../../components/cart-icon/cart-icon-component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown-component";
 

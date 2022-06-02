@@ -1,28 +1,28 @@
 import CheckoutItems from "../../components/checkout-item/checkout-item-component";
-import './checkout-styles.scss';
+import { CheckoutContainer, CheckoutHeader, HeaderBlock  } from "./checkout-styles";
 
 const Checkout = () => {
     return(
-        <div className="checkout-container">
-            <div className="checkout-header">
-                <div className="header-block">
+        <CheckoutContainer>
+            <CheckoutHeader>
+                <HeaderBlock>
                     <span>Prduct</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Description</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Quanity</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Price</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Remove</span>
-                </div>
-            </div>
+                </HeaderBlock>
+            </CheckoutHeader>
             <CheckoutItems />
-        </div>
+        </CheckoutContainer>
     )
 }
 

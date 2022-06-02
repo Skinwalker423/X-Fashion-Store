@@ -1,12 +1,11 @@
 import { useContext} from "react";
 import { CartDropdownContext } from "../../context/cart-dropdown-context";
-
+import { CheckoutItemContainer, Quantity, ImageContainer, Value, Arrow, Name, RemoveButton, Total, Price } from "./checkout-item-styles";
 
 
 const CheckoutItems = () => {
 
     const {cartItems, addItemToCart, removeItemToCart, cancelItemFromCart, totalPrice} = useContext(CartDropdownContext);
-
 
     const cartList = cartItems.map((item) => {
 
@@ -23,30 +22,26 @@ const CheckoutItems = () => {
         }
 
         return (
-            <div key={id} className="checkout-item-container">
-                <div className="image-container">
+            <CheckoutItemContainer key={id}>
+                <ImageContainer>
                     <img src={imageUrl} alt={name} />
-                </div>
-                <span className="name">{name}</span>
-                <span className="quantity">
-                    <div onClick={decrementItem} className="arrow">&#10094;</div>
-                    <span className="value">{qty}</span>
-                    <div onClick={incrementItem} className="arrow">&#10095;</div>
-                </span>
-                <span className="price">{price * qty}</span>
-                <div onClick={cancelItemAndRemoveFromCart} className="remove-button">&#10005;</div>
-            </div>
+                </ImageContainer>
+                <Name>{name}</Name>
+                <Quantity>
+                    <Arrow onClick={decrementItem}>&#10094;</Arrow>
+                    <Value>{qty}</Value>
+                    <Arrow onClick={incrementItem}>&#10095;</Arrow>
+                </Quantity>
+                <Price>{price * qty}</Price>
+                <RemoveButton onClick={cancelItemAndRemoveFromCart}>&#10005;</RemoveButton>
+            </CheckoutItemContainer>
         )
     })
-
-    
-
-    
 
     return (
         <>
             {cartList}
-            <div className="total">Total: ${totalPrice}</div>
+            <Total className="total">Total: ${totalPrice}</Total>
         </>
     )
 }
