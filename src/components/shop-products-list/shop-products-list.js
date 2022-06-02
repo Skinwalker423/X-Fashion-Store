@@ -11,7 +11,7 @@ const ShopCategoryList = ({category}) => {
 
     useEffect(() => {
         setProducts(categoriesMap[category]);
-    }, [products, categoriesMap])
+    }, [products, categoriesMap, category])
 
         return(
             <ShopCategoryListContainer>

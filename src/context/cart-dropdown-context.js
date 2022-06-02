@@ -73,9 +73,7 @@ export const CartDropdownProvider = ({children}) => {
     }, [cartItems, setTotalPrice])
 
     useEffect(() => {
-            // if(!cartItems.length){
-            //     setTotalQuanityInCart(0);
-            // }
+            
             const totalQuantity = cartItems.reduce((previous, current) => {
                 return previous + current.qty;
             }, 0)

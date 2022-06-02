@@ -1,5 +1,5 @@
 import React from "react";
-import { FormInputLabel, Shrink, FormInputStyle, Group } from "./form-input-styles.jsx";
+import { FormInputLabel, FormInputStyle, Group } from "./form-input-styles.jsx";
 
 const FormInput = ({label, ...otherProps }) => {
 
