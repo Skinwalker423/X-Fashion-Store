@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { auth, signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase-utils";
+import { auth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase-utils";
 import { GoogleAuthProvider } from "firebase/auth";
 
 import FormInput from "../form-input/form-input-component";
@@ -33,13 +33,13 @@ const SignInForm = () => {
     const logInGoogleUser = async() => {
         const response = await signInWithGooglePopup();
         const credential = GoogleAuthProvider.credentialFromResult(response);
-        const token = credential.accessToken;
+        console.log(credential);
     }
 
     const onFormSubmit = async(e) => {
         e.preventDefault();
         try{
-            const {user} = await signInAuthUserWithEmailAndPassword(auth, email, password );
+            await signInAuthUserWithEmailAndPassword(auth, email, password );
             resetFormFields();
             console.log('signed in');
         }catch(error){
