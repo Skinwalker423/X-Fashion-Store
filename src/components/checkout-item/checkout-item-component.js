@@ -1,24 +1,27 @@
-import { useContext} from "react";
-import { CartDropdownContext } from "../../context/cart-dropdown-context";
 import { CheckoutItemContainer, Quantity, ImageContainer, Value, Arrow, Name, RemoveButton, Total, Price } from "./checkout-item-styles";
+import { incrementItem, decrementItem, cancelItemAndRemoveFromCart } from "../../store/cartDropdown/cartDropdown.action";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCartItems, selectTotalPrice } from "../../store/cartDropdown/cartDropdown.selector";
 
 
 const CheckoutItems = () => {
 
-    const {cartItems, addItemToCart, removeItemToCart, cancelItemFromCart, totalPrice} = useContext(CartDropdownContext);
+    const dispatch = useDispatch();
+    const cartItems = useSelector(selectCartItems);
+    const totalPrice = useSelector(selectTotalPrice);
 
     const cartList = cartItems.map((item) => {
 
         const {qty, name, price, imageUrl, id} = item;
 
-        const incrementItem = () => {
-            addItemToCart(item);
+        const addItemHandler = () => {
+            dispatch(incrementItem(cartItems, item));
         }
-        const decrementItem = () => {
-           removeItemToCart(item);                                
+        const removeItemHandler = () => {
+           dispatch(decrementItem(cartItems, item));                              
         }
-        const cancelItemAndRemoveFromCart = () => {
-            cancelItemFromCart(item)
+        const cancelItemHandler = () => {
+            dispatch(cancelItemAndRemoveFromCart(cartItems, item));
         }
 
         return (
@@ -28,12 +31,12 @@ const CheckoutItems = () => {
                 </ImageContainer>
                 <Name>{name}</Name>
                 <Quantity>
-                    <Arrow onClick={decrementItem}>&#10094;</Arrow>
+                    <Arrow onClick={removeItemHandler}>&#10094;</Arrow>
                     <Value>{qty}</Value>
-                    <Arrow onClick={incrementItem}>&#10095;</Arrow>
+                    <Arrow onClick={addItemHandler}>&#10095;</Arrow>
                 </Quantity>
                 <Price>{price * qty}</Price>
-                <RemoveButton onClick={cancelItemAndRemoveFromCart}>&#10005;</RemoveButton>
+                <RemoveButton onClick={cancelItemHandler}>&#10005;</RemoveButton>
             </CheckoutItemContainer>
         )
     })

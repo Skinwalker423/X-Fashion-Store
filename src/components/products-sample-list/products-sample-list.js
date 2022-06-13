@@ -1,14 +1,18 @@
-import React, {useContext} from "react";
-import { CategoriesContext } from "../../context/categories-context";
+import React from "react";
 import ProductCard from "../products-card/product-card-component";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { selectCategoriesMap, selectIsLoading } from "../../store/categories/categories.selector";
+import { useSelector } from "react-redux";
+import Spinner from "../spinner/spinner-component";
+
 
 import { CategoriesSampleContainer, ProductTitle, ProductsContainer } from "./products-sample-list-styles";
 
 const ProductsSampleList = () => {
 
-    const {categoriesMap} = useContext(CategoriesContext);
+    const categoriesMap = useSelector(selectCategoriesMap);
+    const isLoading = useSelector(selectIsLoading);
 
     const products = Object.keys(categoriesMap).map((title) => {
         return(
@@ -22,7 +26,7 @@ const ProductsSampleList = () => {
                     }
                     return(
                         <ProductCard 
-                        products={item}
+                        product={item}
                         key={item.id}
                         id={item.id}
                         category={title}
@@ -36,7 +40,7 @@ const ProductsSampleList = () => {
 
     return(
         <Fragment>
-            {products}
+            { isLoading ? <Spinner /> : products }
         </Fragment>
     )
 }

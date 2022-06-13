@@ -1,102 +1,130 @@
-import { createContext, useState, useEffect } from "react";
+// import { createContext, useReducer } from "react";
+// import createAction from "../utils/reducer/createAction";
 
 
-const addCartItem = (cartItems, productToAdd) => {
+// const addCartItem = (cartItems, productToAdd) => {
 
-    const foundItem = cartItems.find(item => item.id === productToAdd.id);
+//     const foundItem = cartItems.find(item => item.id === productToAdd.id);
 
-    if(foundItem){
-        return cartItems.map(item =>
-            item.id === productToAdd.id ?
-             {...item, qty: item.qty + 1} : item
-        )
-    }
+//     if(foundItem){
+//         return cartItems.map(item =>
+//             item.id === productToAdd.id ?
+//              {...item, qty: item.qty + 1} : item
+//         )
+//     }
 
-    return [...cartItems, {...productToAdd, qty: 1}]
-}
-const removeCartItem = (cartItems, productToRemove) => {
+//     return [...cartItems, {...productToAdd, qty: 1}]
+// }
+// const removeCartItem = (cartItems, productToRemove) => {
 
-    const foundItem = cartItems.find(item => item.id === productToRemove.id);
+//     const foundItem = cartItems.find(item => item.id === productToRemove.id);
 
-    if(foundItem.qty === 1){
-        const newCartItems = cartItems.filter(item =>
-            item.id !== productToRemove.id 
-        )
-        return [...newCartItems]
-    }
+//     if(foundItem.qty === 1){
+//         const newCartItems = cartItems.filter(item =>
+//             item.id !== productToRemove.id 
+//         )
+//         return [...newCartItems]
+//     }
 
-    if(foundItem){
-        return cartItems.map(item =>
-            item.id === productToRemove.id ?
-             {...item, qty: item.qty - 1} : item
-        )
-    }
+//     if(foundItem){
+//         return cartItems.map(item =>
+//             item.id === productToRemove.id ?
+//              {...item, qty: item.qty - 1} : item
+//         )
+//     }
 
-    return [...cartItems]
-}
-const cancelCartItem = (cartItems, productToCancel) => {
+//     return [...cartItems]
+// }
+// const cancelCartItem = (cartItems, productToCancel) => {
 
-    const foundItem = cartItems.find(item => item.id === productToCancel.id);
+//     const foundItem = cartItems.find(item => item.id === productToCancel.id);
 
-    if(foundItem){
-        const newCartItems = cartItems.filter(item =>
-            item.id !== productToCancel.id 
-        )
-        return [...newCartItems]
-    }
+//     if(foundItem){
+//         const newCartItems = cartItems.filter(item =>
+//             item.id !== productToCancel.id 
+//         )
+//         return [...newCartItems]
+//     }
 
-    return [...cartItems]
-}
+//     return [...cartItems]
+// }
 
-export const CartDropdownContext = createContext({
-    cartDropdownDisplayed: false,
-    setCartDropdownDisplayed: () => {},
-    cartItems: [],
-    addItemToCart: () => {},
-    totalQuanityInCart: 0,
-    setTotalQuanityInCart: () => {},
-    totalPrice: 0,
-    setTotalPrice: () => {},
-})
+// export const CartDropdownContext = createContext({
+//     cartDropdownDisplayed: false,
+//     setCartDropdownDisplayed: () => {},
+//     cartItems: [],
+//     addItemToCart: () => {},
+//     totalQuanityInCart: 0,
+//     setTotalQuanityInCart: () => {},
+//     totalPrice: 0,
+//     setTotalPrice: () => {},
+// })
 
-export const CartDropdownProvider = ({children}) => {
-    const [cartDropdownDisplayed, setCartDropdownDisplayed] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [totalQuanityInCart, setTotalQuanityInCart] = useState(0);
-    const [totalPrice, setTotalPrice] = useState(0)
+// const ACTION_TYPES = {
+//     'SET_CARTDROPDOWN_DISPLAY': 'SET_CARTDROPDOWN_DISPLAY',
+//     'SET_CART_ITEMS' : 'SET_CART_ITEMS'
+// }
 
-    useEffect(() => {
-        const totals = cartItems.reduce((TotalPrice, currentItem ) => {
-            return TotalPrice + (currentItem.price * currentItem.qty)
-            }, 0)
-        setTotalPrice(totals);
-    }, [cartItems, setTotalPrice])
+// const INITIAL_STATE = {
+//     cartDropdownDisplayed: false,
+//     cartItems: [],
+//     totalQuanityInCart: 0,
+//     totalPrice: 0,
+// }
 
-    useEffect(() => {
-            
-            const totalQuantity = cartItems.reduce((previous, current) => {
-                return previous + current.qty;
-            }, 0)
-            setTotalQuanityInCart(totalQuantity);
-    }, [cartItems, setTotalQuanityInCart])
+// const cartDropdownReducer = (state, action) => {
+//     const { type, payload } = action;
+
+//     switch(type) {
+//         case ACTION_TYPES.SET_CARTDROPDOWN_DISPLAY:
+//             return {...state, cartDropdownDisplayed: payload}
+//         case ACTION_TYPES.SET_CART_ITEMS :
+//             return {...state, ...payload}
+//         default:
+//             return new Error('woops')
+//     }   
+// }
 
 
+// export const CartDropdownProvider = ({children}) => {
+//     const [state, dispatch] = useReducer(cartDropdownReducer, INITIAL_STATE);
+//     const {cartDropdownDisplayed, cartItems, totalQuanityInCart, totalPrice } = state;
 
-    const addItemToCart = (productToAdd) => {
-        setCartItems(addCartItem(cartItems, productToAdd))
-    }
-    const removeItemToCart = (productToRemove) => {
-        setCartItems(removeCartItem(cartItems, productToRemove))
-    }
-    const cancelItemFromCart = (productToCancel) => {
-        setCartItems(cancelCartItem(cartItems, productToCancel))
-    }
+//     const setCartDropdownDisplayed = (isDisplayed) => {
+//         dispatch(createAction(ACTION_TYPES.SET_CARTDROPDOWN_DISPLAY, isDisplayed));
+        
+//     }
 
-    
+//     const updateCartItemsReducer = (newCartItems) => {
 
-    const value = {cartDropdownDisplayed, setCartDropdownDisplayed, cartItems, addItemToCart, totalQuanityInCart, setTotalQuanityInCart, removeItemToCart, totalPrice, setTotalPrice, cancelItemFromCart};
-    return(
-        <CartDropdownContext.Provider value={value} >{children}</CartDropdownContext.Provider>
-    )
-}
+//         const totalQuantity = newCartItems.reduce((previous, current) => {
+//             return previous + current.qty;
+//         }, 0)
+
+//         const totals = newCartItems.reduce((TotalPrice, currentItem ) => {
+//             return TotalPrice + (currentItem.price * currentItem.qty)
+//         }, 0)
+
+//         dispatch(createAction(ACTION_TYPES.SET_CART_ITEMS, { cartItems: newCartItems, totalQuanityInCart: totalQuantity, totalPrice: totals }));
+
+//     }
+
+//     const addItemToCart = (productToAdd) => {
+//         const newCartItems = addCartItem(cartItems, productToAdd);
+//         updateCartItemsReducer(newCartItems);
+//     }
+//     const removeItemToCart = (productToRemove) => {
+//         const newCartItems = removeCartItem(cartItems, productToRemove);
+//         updateCartItemsReducer(newCartItems);
+//     }
+//     const cancelItemFromCart = (productToCancel) => {
+//         const newCartItems = cancelCartItem(cartItems, productToCancel);updateCartItemsReducer(newCartItems);
+//     }
+
+
+//     const value = {cartDropdownDisplayed, setCartDropdownDisplayed, cartItems, addItemToCart, totalQuanityInCart, removeItemToCart, totalPrice, cancelItemFromCart};
+//     return(
+//         <CartDropdownContext.Provider value={value} >{children}</CartDropdownContext.Provider>
+//     )
+// }
 

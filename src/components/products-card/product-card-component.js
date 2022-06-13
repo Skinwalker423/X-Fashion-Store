@@ -1,23 +1,22 @@
 import React from "react";
 import Button, {BUTTON_THEME} from "../button/button-component";
-import { useContext } from "react";
-import { CartDropdownContext } from "../../context/cart-dropdown-context";
 import { Link } from "react-router-dom";
 import { ProductCardContainer, Name, Price, Footer } from "./products-card-styles.jsx";
+import { selectCartItems } from "../../store/cartDropdown/cartDropdown.selector";
+import { useSelector, useDispatch } from "react-redux";
+import { incrementItem } from "../../store/cartDropdown/cartDropdown.action";
 
 
-const ProductCard = ({ products, id, category }) => {
+const ProductCard = ({ product, id, category }) => {
 
-    const {name, price, imageUrl} = products;
-    const { addItemToCart} = useContext(CartDropdownContext);
-
-
-
+    const dispatch = useDispatch()
+    const {name, price, imageUrl} = product;
+    const cartItems = useSelector(selectCartItems);
+    
     const addProductToCart = (e) => {
         e.preventDefault();
-        addItemToCart(products);
+        dispatch(incrementItem(cartItems, product));
         console.log(`added ${name} to cart`);
-
     }
 
     return (
