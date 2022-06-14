@@ -5,10 +5,6 @@ export const setCurrentUser = (user) => {
         return createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user );
     }
 
-// export const setCurrentUserStart = (user) => {
-//         return createAction(USER_ACTION_TYPES.SET_CURRENT_USER_START, user);
-//     }
-
 export const checkUserSession = () => {
     return createAction(USER_ACTION_TYPES.CHECK_USER_SESSION)
 }
@@ -27,4 +23,27 @@ export const signInSucess = (user) => {
 export const signInFailed = (error) => {
     return createAction(USER_ACTION_TYPES.SIGN_IN_FAILED, error)
 }
+
+export const createUserStart = (displayName, email, password) => {
+    return createAction(USER_ACTION_TYPES.SIGN_UP_START, {displayName, email, password})
+}
+
+export const signUpAndSignInSuccess = (user, additionalDetails) => {
+    return createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user, additionalDetails})
+}
+
+export const signUpAndSignInFailed = (error) => {
+    return createAction(USER_ACTION_TYPES.SIGN_UP_FAILED, error)
+}
+
+export const userLogOutStart = () => {
+    return createAction(USER_ACTION_TYPES.SET_LOG_OUT_START)
+}
+export const userLogOutSuccess = () => {
+    return createAction(USER_ACTION_TYPES.SET_LOG_OUT_SUCCESS)
+}
+export const userLogOutFailed = (error) => {
+    return createAction(USER_ACTION_TYPES.SET_LOG_OUT_FAILED, error)
+}
+
 

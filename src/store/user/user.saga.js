@@ -1,15 +1,13 @@
 import { call, all, takeLatest, put } from "redux-saga/effects";
-import { createUserDocumentFromAuth, onAuthStateChangedListener, getCurrentUser } from "../../utils/firebase/firebase-utils";
+import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword, getCurrentUser, signInWithGooglePopup, signInAuthUserWithEmailAndPassword, auth, signOutUser } from "../../utils/firebase/firebase-utils";
 import { USER_ACTION_TYPES } from "./user.types";
-import { setCurrentUser, signInSucess, signInFailed } from "./user.action";
+import { signInSucess, signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed } from "./user.action";
 
 
 export function* createSnapshotFromUserAuth(userAuth, additionalDetails){
     try{
         const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
-        console.log(userSnapshot);
-        console.log(userSnapshot.data);
-
+        yield put(signInSucess({...userSnapshot.data(), id: userSnapshot.id}));
     }catch(error){
         yield put(signInFailed);
         console.log('problem creating user', error.message);
@@ -19,26 +17,64 @@ export function* createSnapshotFromUserAuth(userAuth, additionalDetails){
 export function* isUserAuthenticated(){
     try{
         const userAuth = yield call(getCurrentUser);
-        if(userAuth){
+        if(!userAuth){
             return;
         }
+        yield call(createSnapshotFromUserAuth, userAuth);
     }catch(error){
         yield put(signInFailed(error))
     }
 }
 
-export function* emailSignInUserAsync(){
-    // const user = yield call(signInAuthUserWithEmailAndPassword, auth, email, password );
+export function* emailSignInUserAsync({payload: {email, password}}){
+
+    try{
+        const {user} = yield call(signInAuthUserWithEmailAndPassword,auth, email, password);
+        // const credential = GoogleAuthProvider.credentialFromResult(response);
+        // console.log(credential);
+        yield call(createSnapshotFromUserAuth, user);
+    }catch(error){
+        yield put(signInFailed(error))
+    }
 }
 
 
 export function* googleSignInUserAsync(){
     try{
-        const user = yield call(getCurrentUser);
+        const {user} = yield call(signInWithGooglePopup);
+        // const credential = GoogleAuthProvider.credentialFromResult(response);
+        // console.log(credential);
+        yield call(createSnapshotFromUserAuth, user);
         yield put(signInSucess(user));
     }catch(error){
-        yield put(signInFailed(error))
+        yield put(signInFailed(error));
     }
+}
+
+export function* logOutUser(){
+    try{
+        yield call(signOutUser);
+        yield put(userLogOutSuccess());
+        
+
+    }catch(error){
+        yield put(userLogOutFailed(error))
+    }
+}
+
+export function* signInAfterSignUp({payload: {user, additionalDetails}}){
+        yield call(createSnapshotFromUserAuth, user, additionalDetails)
+}
+
+export function* createUserWithEmailPassword(action){
+        const {email, password, displayName} = action.payload;
+        try {
+            const {user} = yield call(createAuthUserWithEmailAndPassword, email, password);
+            yield put(signUpAndSignInSuccess(user,{displayName}));
+
+        } catch (error) {
+           yield put(signUpAndSignInFailed(error));
+        }
 }
 
 export function* onEmailSignIn(){
@@ -53,11 +89,19 @@ export function* onCheckUserSession(){
     yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated )
 }
 
-export function* onSetCurrentUser(){
-    yield takeLatest(USER_ACTION_TYPES.SET_CURRENT_USER, isUserAuthenticated )
+export function* onUserLogOutStart(){
+    yield takeLatest(USER_ACTION_TYPES.SET_LOG_OUT_START, logOutUser )
+}
+
+export function* onSignUpFormSubmit(){
+    yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, createUserWithEmailPassword)
+}
+
+export function* onSignUpSuccess(){
+    yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp)
 }
 
 
 export function* userSaga(){
-    yield all([onSetCurrentUser, onCheckUserSession]);
+    yield all([call(onCheckUserSession), call(onGoogleSignIn), call(onEmailSignIn), call(onUserLogOutStart), call(onSignUpFormSubmit), call(onSignUpSuccess)]);
 }

@@ -13,7 +13,6 @@ const ShopCategoryList = ({category}) => {
     const [products, setProducts] = useState(categoriesMap[category]);
 
     useEffect(() => {
-        console.log('effect fired for setProducts');
         setProducts(categoriesMap[category]);
     }, [products, categoriesMap, category])
 

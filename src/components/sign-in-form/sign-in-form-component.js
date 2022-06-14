@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import { auth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase-utils";
-import { GoogleAuthProvider } from "firebase/auth";
 import { useSelector } from "react-redux";
 import { selectCurrentPath } from "../../store/currentPath/currentPath.selector";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "../form-input/form-input-component";
 import Button, {BUTTON_THEME} from "../button/button-component";
 import { SignInFormContainer, ButtonsContainer } from "./sign-in-form-styles";
-import { signInSucess, signInFailed } from "../../store/user/user.action";
+import { signInFailed, googleSignInStart, emailSignInStart } from "../../store/user/user.action";
 import { useDispatch } from "react-redux/es/exports";
 
 
@@ -40,20 +38,24 @@ const SignInForm = () => {
     }
 
 
-    const logInGoogleUser = async() => {
-        const response = await signInWithGooglePopup();
-        const credential = GoogleAuthProvider.credentialFromResult(response);
-        console.log(credential);
+    const logInGoogleUser = () => {
+        // const response = await signInWithGooglePopup();
+        // const credential = GoogleAuthProvider.credentialFromResult(response);
+        // console.log(credential);
+        dispatch(googleSignInStart(email, password));
     }
+    
+
+
 
     const onFormSubmit = async(e) => {
         e.preventDefault();
+        // dispatch(emailSignInStart(email, password));
         try{
-            await signInAuthUserWithEmailAndPassword(auth, email, password );
+            dispatch(emailSignInStart(email, password));
             resetFormFields();
-            console.log('signed in');
-            dispatch(signInSucess(auth.currentUser));
             navigate(currentPath);
+            console.log('signed in');
         }catch(error){
             dispatch(signInFailed(error))
         }
