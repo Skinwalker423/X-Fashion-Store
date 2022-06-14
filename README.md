@@ -1,6 +1,10 @@
 # Getting Started with Create React App
-
+Deployed app: 
+https://x-fashion.netlify.app
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+![xfashionlandingpage](https://user-images.githubusercontent.com/85347852/173704089-3baa21bc-2a79-469e-a68f-a8a8060cee63.PNG)
+
 
 ## Available Scripts
 
