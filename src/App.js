@@ -7,6 +7,8 @@ import Checkout from "./routes/checkout/checkout-component";
 import {useEffect} from "react";
 import { checkUserSession } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
+import PaymentForm from "./components/payment-form/payment-form-component";
+import ThankYou from "./routes/thankyou/thankYou-component";
 
 
 
@@ -30,6 +32,8 @@ const App = () => {
           <Route path="auth" element={<Authorization />} />
           <Route path="logout" element={<Home />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="payment" element={<PaymentForm />} />
+          <Route path="thankyou" element={<ThankYou />} />
         </Route>
       </Routes>
     </div>
