@@ -7,7 +7,7 @@ const ThankYou = () => {
         <ThankBody>
             <ThankYouContainer>
                 <h1>Thank You for the purchase!</h1>
-                <img src="../logo512.PNG" />
+                <img src="../logo512.PNG" alt='thank you pic' />
                 <Link to="/shop">
                     <Button title='Continue Shopping' />
                 </Link>
