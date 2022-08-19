@@ -1,5 +1,5 @@
 import { CATEGORIES_ACTION_TYPES } from "./categories.types.ts";
-import createAction from "../../utils/reducer/createAction";
+import {createAction} from "../../utils/reducer/createAction.ts";
 
 
 export const fetchCategoriesStart =() => {
