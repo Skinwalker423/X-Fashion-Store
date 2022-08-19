@@ -1,5 +1,5 @@
 import { ACTION_TYPES } from "./cartDropdown.types";
-import createAction from "../../utils/reducer/createAction";
+import { createAction } from "../../utils/reducer/createAction.ts";
 
 const addCartItem = (cartItems, productToAdd) => {
         const foundItem = cartItems.find(item => item.id === productToAdd.id);
