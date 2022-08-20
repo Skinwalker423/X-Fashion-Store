@@ -1,4 +1,4 @@
-import { CATEGORIES_ACTION_TYPES, Category, Error } from "./categories.types";
+import { CATEGORIES_ACTION_TYPES, Category } from "./categories.types";
 import {createAction, Action, ActionWithPayload} from "../../utils/reducer/createAction";
 
 export type FetchCategoriesStart = Action<CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START>
