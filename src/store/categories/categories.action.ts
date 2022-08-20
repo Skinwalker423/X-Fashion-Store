@@ -13,7 +13,7 @@ export type FetchCategoriesSuccess = ActionWithPayload<CATEGORIES_ACTION_TYPES.F
 
 export type FetchCategoriesFail = ActionWithPayload<CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAIL, errorProps>
 
-
+export type CategoryAction = FetchCategoriesStart | FetchCategoriesSuccess | FetchCategoriesFail;
 
 
 
