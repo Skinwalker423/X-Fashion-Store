@@ -18,6 +18,6 @@ export type Category = {
     items: CatetogyItem[]
 }
 
-export type Error = {
-    message: string;
+export type CategoryMap = {
+    [key: string] : CatetogyItem[]
 }
