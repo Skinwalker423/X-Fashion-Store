@@ -1,5 +1,6 @@
 import { ACTION_TYPES, CartItem } from "./cartDropdown.types";
 import { AnyAction } from "redux";
+import { setCartDropdownDisplayed, setCartItems, setTotalPrice, setTotalQuanityInCart } from "./cartDropdown.action";
 
 export type InitialState = {
     readonly cartDropdownDisplayed: boolean;
@@ -17,35 +18,20 @@ const INITIAL_STATE : InitialState = {
 
 }
 
-
-
 export const cartDropdownReducer = (state = INITIAL_STATE, action = {} as AnyAction) : InitialState => {
-    const { type, payload } = action;
 
-    switch(type) {
-        case ACTION_TYPES.SET_CARTDROPDOWN_DISPLAY:
-            return {...state, cartDropdownDisplayed: payload}
-        case ACTION_TYPES.SET_CART_ITEMS :
-            return {...state, cartItems: payload}
-        case ACTION_TYPES.SET_TOTAL_QTY :
-            return {...state, totalQuantityInCart: payload}
-        case ACTION_TYPES.SET_TOTAL_PRICE :
-            return {...state, totalPrice: payload}
-        default:
-            return state;
-    }   
+    if(setCartDropdownDisplayed.match(action)){
+        return {...state, cartDropdownDisplayed: action.payload}
+    }
+    if(setCartItems.match(action)){
+        return {...state, cartItems: action.payload}
+    }
+    if(setTotalPrice.match(action)){
+        return {...state, totalPrice: action.payload}
+    }
+    if(setTotalQuanityInCart.match(action)){
+        return {...state, totalQuantityInCart: action.payload}
+    }
+    
+    return state
 }
-
-// export const updateCartItemsReducer = (newCartItems) => {
-
-//         const totalQuantity = newCartItems.reduce((previous, current) => {
-//             return previous + current.qty;
-//         }, 0)
-
-//         const totals = newCartItems.reduce((TotalPrice, currentItem ) => {
-//             return TotalPrice + (currentItem.price * currentItem.qty)
-//         }, 0)
-
-//         createAction(ACTION_TYPES.SET_CART_ITEMS, { cartItems: newCartItems, totalQuanityInCart: totalQuantity, totalPrice: totals });
-
-//     }
