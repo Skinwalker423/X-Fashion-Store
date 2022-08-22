@@ -5,7 +5,7 @@ export enum CATEGORIES_ACTION_TYPES {
     FETCH_CATEGORIES_FAIL = 'FETCH_CATEGORIES_FAIL',
 }
 
-export type CatetogyItem = {
+export type CategoryItem = {
     id: number;
     imageUrl: string;
     price: number;
@@ -15,9 +15,9 @@ export type CatetogyItem = {
 export type Category = {
     title: string;
     imageUrl: string;
-    items: CatetogyItem[]
+    items: CategoryItem[]
 }
 
 export type CategoryMap = {
-    [key: string] : CatetogyItem[]
+    [key: string] : CategoryItem[]
 }
