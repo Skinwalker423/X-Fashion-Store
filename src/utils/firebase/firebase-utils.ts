@@ -127,7 +127,7 @@ export type AdditionalInformation = {
   displayName?: string;
 }
 
-export type Userdata = {
+export type UserData = {
   displayName: string;
   createdAt: Date;
   email: string;

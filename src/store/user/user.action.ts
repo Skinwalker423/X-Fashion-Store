@@ -1,24 +1,25 @@
 import {createAction, Action, ActionWithPayload} from "../../utils/reducer/createAction";
-import { USER_ACTION_TYPES, User } from "./user.types";
+import { USER_ACTION_TYPES } from "./user.types";
 import { withMatcher } from "../../utils/reducer/createAction";
-import { Sign } from "crypto";
+import { User } from "firebase/auth";
+import { AdditionalInformation, UserData } from "../../utils/firebase/firebase-utils";
 
 
-export type SetCurrentUser = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER, User>
+export type SetCurrentUser = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER, UserData>
 
 export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>
 
-export type GoogleSignInStart = ActionWithPayload<USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, {email: string, password: string} >
+export type GoogleSignInStart = Action<USER_ACTION_TYPES.GOOGLE_SIGN_IN_START >
 
 export type EmailSignInStart = ActionWithPayload<USER_ACTION_TYPES.EMAIL_SIGN_IN_START, {email: string, password: string} >
 
-export type SignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, User>
+export type SignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, UserData>
 
 export type SignInFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_FAILED, Error>
 
 export type CreateUserStart = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_START, {displayName: string, email: string, password: string} >
 
-export type SignUpAndSignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user: User, additionalDetails: {}}>
+export type SignUpAndSignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user: UserData, additionalDetails: AdditionalInformation}>
 
 export type SignUpAndSignInFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_FAILED, Error>
 
@@ -30,7 +31,7 @@ export type UserLogOutFailed = ActionWithPayload<USER_ACTION_TYPES.SET_LOG_OUT_F
 
 
 
-export const setCurrentUser = withMatcher((user: User) : SetCurrentUser => {
+export const setCurrentUser = withMatcher((user: UserData) : SetCurrentUser => {
         return createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user );
     })
 
@@ -38,15 +39,15 @@ export const checkUserSession = withMatcher((): CheckUserSession => {
     return createAction(USER_ACTION_TYPES.CHECK_USER_SESSION)
 })
 
-export const googleSignInStart = withMatcher((email: string, password: string): GoogleSignInStart => {
-    return createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, {email, password})
+export const googleSignInStart = withMatcher((): GoogleSignInStart => {
+    return createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START)
 })
 
 export const emailSignInStart = withMatcher((email: string, password: string): EmailSignInStart => {
     return createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, {email, password})
 })
 
-export const signInSucess = withMatcher((user: User): SignInSuccess => {
+export const signInSuccess = withMatcher((user: UserData): SignInSuccess => {
     return createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user)
 })
 
@@ -58,7 +59,7 @@ export const createUserStart = withMatcher((displayName: string, email: string, 
     return createAction(USER_ACTION_TYPES.SIGN_UP_START, {displayName, email, password})
 })
 
-export const signUpAndSignInSuccess = withMatcher((user: User, additionalDetails: {}): SignUpAndSignInSuccess => {
+export const signUpAndSignInSuccess = withMatcher((user: UserData, additionalDetails: AdditionalInformation): SignUpAndSignInSuccess => {
     return createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user, additionalDetails})
 })
 
