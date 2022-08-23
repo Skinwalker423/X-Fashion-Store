@@ -1,13 +1,13 @@
 import { call, all, takeLatest, put } from "redux-saga/effects";
 import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword, getCurrentUser, signInWithGooglePopup, signInAuthUserWithEmailAndPassword,signOutUser, auth } from "../../utils/firebase/firebase-utils";
 import { USER_ACTION_TYPES } from "./user.types";
-import { signInSucess, signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed } from "./user.action";
+import { signInSuccess, signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed } from "./user.action";
 
 
 export function* createSnapshotFromUserAuth(userAuth, additionalDetails){
     try{
         const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
-        yield put(signInSucess({...userSnapshot.data(), id: userSnapshot.id}));
+        yield put(signInSuccess({...userSnapshot.data(), id: userSnapshot.id}));
     }catch(error){
         yield put(signInFailed);
         console.log('problem creating user', error.message);
@@ -46,7 +46,7 @@ export function* googleSignInUserAsync(){
         // const credential = GoogleAuthProvider.credentialFromResult(response);
         // console.log(credential);
         yield call(createSnapshotFromUserAuth, user);
-        yield put(signInSucess(user));
+        yield put(signInSuccess(user));
     }catch(error){
         yield put(signInFailed(error));
     }

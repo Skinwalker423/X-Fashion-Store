@@ -24,7 +24,7 @@ import {
   QueryDocumentSnapshot,
 } from 'firebase/firestore';
 
-import { Category, CategoryItem } from "../../store/categories/categories.types";
+import { Category } from "../../store/categories/categories.types";
 
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -127,13 +127,13 @@ export type AdditionalInformation = {
   displayName?: string;
 }
 
-export type Userdata = {
+export type UserData = {
   displayName: string;
   createdAt: Date;
   email: string;
 }
 
-export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails = {} as AdditionalInformation) : Promise<void | QueryDocumentSnapshot<Userdata>> => {
+export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails = {} as AdditionalInformation) : Promise<void | QueryDocumentSnapshot<UserData>> => {
     const userDocRef = doc(db, 'users', userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
@@ -158,7 +158,7 @@ export const createUserDocumentFromAuth = async(userAuth: User, additionalDetail
       }
     }
 
-    return userSnapshot as QueryDocumentSnapshot<Userdata>;
+    return userSnapshot as QueryDocumentSnapshot<UserData>;
 
 }
 
