@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware, Middleware} from "redux";
-import { persistReducer, persistStore } from "redux-persist";
+import { persistReducer, persistStore, PersistConfig } from "redux-persist";
 import logger from "redux-logger";
 // import thunk from "redux-thunk";
 import { rootReducer } from "./root-reducer";
@@ -13,11 +13,14 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 const sagaMiddleware = createSagaMiddleware();
 
-const persistConfig = {
+type ExtentedPersistConfig = PersistConfig<RootState> & {
+    whitelist: (keyof RootState)[];
+}
+
+const persistConfig: ExtentedPersistConfig = {
     key: 'root',
     storage,
-    blacklist: ['user'],
-    whitelist: ['cartItems', 'cartDropdown']
+    whitelist: ['cartDropdown']
 }
 
 declare global {

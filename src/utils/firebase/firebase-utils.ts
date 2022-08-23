@@ -103,7 +103,7 @@ export type ObjectToAdd = {
   title: string;
 }
 
-export const addCollectionAndDocuments = async<T extends ObjectToAdd>(collectionKey: string, objectsToAdd: ObjectToAdd[]): Promise<void> => {
+export const addCollectionAndDocuments = async<T extends ObjectToAdd>(collectionKey: string, objectsToAdd: T[]): Promise<void> => {
     const collectionRef = collection(db, collectionKey);
     const batch = writeBatch(db);
 
