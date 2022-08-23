@@ -1,7 +1,6 @@
 import {createAction, Action, ActionWithPayload} from "../../utils/reducer/createAction";
 import { USER_ACTION_TYPES } from "./user.types";
 import { withMatcher } from "../../utils/reducer/createAction";
-import { User } from "firebase/auth";
 import { AdditionalInformation, UserData } from "../../utils/firebase/firebase-utils";
 
 
