@@ -1,5 +1,5 @@
 import { call, all, takeLatest, put } from "typed-redux-saga/macro";
-import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword, getCurrentUser, signInWithGooglePopup, signInAuthUserWithEmailAndPassword,signOutUser, auth, UserData, AdditionalInformation } from "../../utils/firebase/firebase-utils";
+import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword, getCurrentUser, signInWithGooglePopup, signInAuthUserWithEmailAndPassword,signOutUser, AdditionalInformation } from "../../utils/firebase/firebase-utils";
 import { User } from "firebase/auth";
 import { USER_ACTION_TYPES } from "./user.types";
 import { signInSuccess, signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed, EmailSignInStart, SignUpAndSignInSuccess, CreateUserStart } from "./user.action";
@@ -46,13 +46,12 @@ export function* emailSignInUserAsync({payload: {email, password}}: EmailSignInS
 }
 
 
-export function* googleSignInUserAsync(){
+export function* googleSignInUserAsync() {
     try{
         const userCredential = yield* call(signInWithGooglePopup);
         if(userCredential){
             const {user} = userCredential;
             yield* call(createSnapshotFromUserAuth, user);
-            yield* put(signInSuccess(user));
         }
     }catch(error){
         yield* put(signInFailed(error as Error));
@@ -70,11 +69,8 @@ export function* logOutUser(){
     }
 }
 
-export function* signInAfterSignUp({payload: {user, additionalDetails}}: SignUpAndSignInSuccess){
-        
-        yield* call(createSnapshotFromUserAuth, user, additionalDetails)
-        
-        
+export function* signInAfterSignUp({payload: {user, additionalDetails}}: SignUpAndSignInSuccess){   
+    yield* call(createSnapshotFromUserAuth, user, additionalDetails)
 }
 
 export function* createUserWithEmailPassword({payload: {email, password, displayName}}: CreateUserStart){
