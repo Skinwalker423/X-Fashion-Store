@@ -1,4 +1,4 @@
-import { all, call, takeLatest, put } from "typed-redux-saga";
+import { all, call, takeLatest, put } from "typed-redux-saga/macro";
 
 import { getCategoriesAndDocuments } from "../../utils/firebase/firebase-utils";
 
