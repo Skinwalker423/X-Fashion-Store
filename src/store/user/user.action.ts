@@ -2,6 +2,7 @@ import {createAction, Action, ActionWithPayload} from "../../utils/reducer/creat
 import { USER_ACTION_TYPES } from "./user.types";
 import { withMatcher } from "../../utils/reducer/createAction";
 import { AdditionalInformation, UserData } from "../../utils/firebase/firebase-utils";
+import { User } from "firebase/auth";
 
 
 export type SetCurrentUser = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER, UserData>
@@ -18,7 +19,7 @@ export type SignInFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_FAILED, E
 
 export type CreateUserStart = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_START, {displayName: string, email: string, password: string} >
 
-export type SignUpAndSignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user: UserData, additionalDetails: AdditionalInformation}>
+export type SignUpAndSignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user: User, additionalDetails?: AdditionalInformation}>
 
 export type SignUpAndSignInFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_FAILED, Error>
 
@@ -46,7 +47,7 @@ export const emailSignInStart = withMatcher((email: string, password: string): E
     return createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, {email, password})
 })
 
-export const signInSuccess = withMatcher((user: UserData): SignInSuccess => {
+export const signInSuccess = withMatcher((user: UserData & {id: string}): SignInSuccess => {
     return createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user)
 })
 
@@ -58,7 +59,7 @@ export const createUserStart = withMatcher((displayName: string, email: string, 
     return createAction(USER_ACTION_TYPES.SIGN_UP_START, {displayName, email, password})
 })
 
-export const signUpAndSignInSuccess = withMatcher((user: UserData, additionalDetails: AdditionalInformation): SignUpAndSignInSuccess => {
+export const signUpAndSignInSuccess = withMatcher((user: User, additionalDetails: AdditionalInformation): SignUpAndSignInSuccess => {
     return createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user, additionalDetails})
 })
 
