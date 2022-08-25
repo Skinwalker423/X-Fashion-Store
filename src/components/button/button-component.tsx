@@ -20,6 +20,7 @@ const getButton = (buttonType = BUTTON_THEME.base): typeof BaseButton => (
 )
 
 export type ButtonProps = {
+    title?: string;
     theme?: BUTTON_THEME;
     isLoading?: boolean;
     

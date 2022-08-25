@@ -26,7 +26,7 @@ const ProductCard = ({ product, id, category }) => {
                 <Name>{name}</Name>
                 <Price>${price}</Price>
             </Footer>
-            <Button title={'buy'} theme={BUTTON_THEME.inverted} onClickHandler={addProductToCart}  />                           
+            <Button title='buy' theme={BUTTON_THEME.inverted} onClick={addProductToCart}  />                           
         </ProductCardContainer>
     )
 }
