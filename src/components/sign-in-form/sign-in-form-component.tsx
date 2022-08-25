@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, ChangeEvent, FormEvent} from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentPath } from "../../store/currentPath/currentPath.selector";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,7 @@ const SignInForm = () => {
         setSignInFormFields(defaultSignInFormFields);
     }
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setSignInFormFields({ ...signInFormFields, [name]: value });
     }
@@ -42,13 +42,13 @@ const SignInForm = () => {
         // const response = await signInWithGooglePopup();
         // const credential = GoogleAuthProvider.credentialFromResult(response);
         // console.log(credential);
-        dispatch(googleSignInStart(email, password));
+        dispatch(googleSignInStart());
     }
     
 
 
 
-    const onFormSubmit = async(e) => {
+    const onFormSubmit = async(e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // dispatch(emailSignInStart(email, password));
         try{
@@ -57,7 +57,7 @@ const SignInForm = () => {
             navigate(currentPath);
             console.log('signed in');
         }catch(error){
-            dispatch(signInFailed(error))
+            dispatch(signInFailed(error as Error))
         }
     }
 
