@@ -4,20 +4,15 @@ import { FormInputLabel, FormInputStyle, Group } from "./form-input-styles.jsx";
 type FormInputProps = {
     label: string;
 
-} & InputHTMLAttributes<HTMLInputElement>
+} & InputHTMLAttributes<HTMLInputElement>;
 
 const FormInput: FC<FormInputProps> = ({label, ...otherProps }) => {
-
-    if(otherProps.value){
-        const hasInput = otherProps.value;
-        
         return(
             <Group>
             <FormInputStyle {...otherProps} />
-            <FormInputLabel shrink={Boolean(label && hasInput && typeof hasInput === 'string' && hasInput.length )} htmlFor={otherProps.name}>{label}</FormInputLabel>
+            <FormInputLabel shrink={Boolean(label && otherProps.value && typeof otherProps.value === 'string' && otherProps.value.length )} htmlFor={otherProps.name}>{label}</FormInputLabel>
         </Group>
         )
-    }
 }
 
 export default FormInput;

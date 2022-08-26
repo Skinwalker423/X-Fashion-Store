@@ -39,9 +39,6 @@ const SignInForm = () => {
 
 
     const logInGoogleUser = () => {
-        // const response = await signInWithGooglePopup();
-        // const credential = GoogleAuthProvider.credentialFromResult(response);
-        // console.log(credential);
         dispatch(googleSignInStart());
     }
     
@@ -50,7 +47,6 @@ const SignInForm = () => {
 
     const onFormSubmit = async(e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // dispatch(emailSignInStart(email, password));
         try{
             dispatch(emailSignInStart(email, password));
             resetFormFields();
