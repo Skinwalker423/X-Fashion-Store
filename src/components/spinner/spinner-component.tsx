@@ -1,4 +1,4 @@
-import './spinner-style.scss';
+import { SpinnerContainer } from "./spinner-style";
 
 export type SpinnerProps = {
     title?: string;
@@ -6,9 +6,9 @@ export type SpinnerProps = {
 
 const Spinner = ({title}: SpinnerProps) => {
     return (
-        <div id='spinner'>
+        <SpinnerContainer>
             <div className="ui active massive centered inline loader">{title}</div>
-        </div>
+        </SpinnerContainer>
     )
 }
 
