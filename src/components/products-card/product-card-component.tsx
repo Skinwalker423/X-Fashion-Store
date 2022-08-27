@@ -1,7 +1,7 @@
 import React, {MouseEvent} from "react";
 import Button, {BUTTON_THEME} from "../button/button-component";
 import { Link } from "react-router-dom";
-import { ProductCardContainer, Name, Price, Footer } from "./products-card-styles.jsx";
+import { ProductCardContainer, Name, Price, Footer } from "./products-card-styles";
 import { selectCartItems } from "../../store/cartDropdown/cartDropdown.selector";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementItem } from "../../store/cartDropdown/cartDropdown.action";

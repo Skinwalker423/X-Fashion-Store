@@ -1,4 +1,4 @@
-import { CartIconContainer, ShoppingIcon, ItemCount } from './cart-icon-styles.jsx';
+import { CartIconContainer, ShoppingIcon, ItemCount } from './cart-icon-styles';
 import { setCartDropdownDisplayed } from '../../store/cartDropdown/cartDropdown.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartDisplayed, selectTotalQty } from '../../store/cartDropdown/cartDropdown.selector';

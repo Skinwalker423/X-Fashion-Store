@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import CategoryCard from '../../components/category-item/category-card';
 import ShopCategoryList from '../../components/shop-products-list/shop-products-list';
 
 export type CategoryRouteParams = {

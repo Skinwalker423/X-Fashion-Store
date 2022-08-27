@@ -10,7 +10,7 @@ import { stripePromise } from './utils/stripe/stripe.utils';
 
 import { PersistGate } from 'redux-persist/integration/react';
 
-import './index.scss';
+import './index-styles.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLInputElement);
 root.render(
