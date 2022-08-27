@@ -27,6 +27,7 @@ export const HeaderBlock = styled.div`
 `
 
 export const PaymentButton = styled(Button)`
-    margin-top: 500px;
-    height: 500px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 500px;
 `

@@ -9,7 +9,7 @@ import { selectCartDisplayed } from "../../store/cartDropdown/cartDropdown.selec
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentPath } from "../../store/currentPath/currentPath.acton";
-import { userLogOutStart } from "../../store/user/user.action";
+import { userLogOutStart, userLogOutFailed } from "../../store/user/user.action";
 import {ReactComponent as CrownLogo} from '../../assets/crown.svg';
 
 
@@ -25,7 +25,12 @@ const NavBar = () => {
     const location = useLocation();
 
     const logOffAuthUser = async() => {
-            dispatch(userLogOutStart());
+        try{
+            dispatch(userLogOutStart()); 
+
+        }catch(e){
+            dispatch(userLogOutFailed(e as Error))
+        }
         }
 
     const saveCurrentPath = () => {

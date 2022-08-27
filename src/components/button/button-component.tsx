@@ -27,12 +27,12 @@ export type ButtonProps = {
 
 
 
-const Button: FC<ButtonProps> = ({children, theme, isLoading, ...otherProps}) => {
+const Button: FC<ButtonProps> = ({children, theme, title, isLoading, ...otherProps}) => {
 
     const CustomButton = getButton(theme);
 
     return (
-        <CustomButton disabled={isLoading} {...otherProps}>{isLoading ? <ButtonSpinner /> : children }</CustomButton>
+        <CustomButton disabled={isLoading} {...otherProps}>{isLoading ? <ButtonSpinner /> : children }{title}</CustomButton>
     )
 }
 
