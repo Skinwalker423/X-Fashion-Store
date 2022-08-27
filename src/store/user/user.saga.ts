@@ -2,8 +2,7 @@ import { call, all, takeLatest, put } from "typed-redux-saga/macro";
 import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword, getCurrentUser, signInWithGooglePopup, signInAuthUserWithEmailAndPassword,signOutUser, AdditionalInformation } from "../../utils/firebase/firebase-utils";
 import { User } from "firebase/auth";
 import { USER_ACTION_TYPES } from "./user.types";
-import {signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed, EmailSignInStart, SignUpAndSignInSuccess, CreateUserStart } from "./user.action";
-import { signInSuccess } from "./user.action";
+import {signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed, EmailSignInStart, SignUpAndSignInSuccess, CreateUserStart, signInSuccess } from "./user.action";
 
 
 export function* createSnapshotFromUserAuth(userAuth: User, additionalDetails?: AdditionalInformation){
