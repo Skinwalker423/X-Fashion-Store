@@ -1,6 +1,7 @@
-import React from "react";
+import React, {FC} from "react";
 import { useNavigate } from "react-router-dom";
 import { CategoryContainer, CategoryBody, BackgroundImage } from "./category-card-styles";
+
 
 export type CategoryCardProps = {
     category: {
@@ -11,7 +12,7 @@ export type CategoryCardProps = {
     
 }
 
-const CategoryCard = ({category}: CategoryCardProps) => {
+const CategoryCard: FC<CategoryCardProps> = ({category}) => {
 
     const { imageUrl, title, route} = category;
     const navigate = useNavigate();

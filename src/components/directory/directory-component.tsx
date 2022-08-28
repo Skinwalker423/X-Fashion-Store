@@ -2,8 +2,15 @@ import React from "react";
 import CategoryCard from "../category-item/category-card";
 import { CategoriesContainer } from "./directory-styles";
 
+export type DirectoryCategory = {
+  id: number;
+  title: string;
+  imageUrl: string;
+  route: string;
+}
 
-const categories = [
+
+const categories: DirectoryCategory[] = [
   {
     "id": 1,
     "title": "hats",

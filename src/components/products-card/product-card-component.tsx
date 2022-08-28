@@ -1,4 +1,4 @@
-import React, {MouseEvent} from "react";
+import React, {MouseEvent, FC} from "react";
 import Button, {BUTTON_THEME} from "../button/button-component";
 import { Link } from "react-router-dom";
 import { ProductCardContainer, Name, Price, Footer } from "./products-card-styles";
@@ -15,7 +15,7 @@ export type ProductCardProps = {
     key: number;
 }
 
-const ProductCard = ({ product, category, key }: ProductCardProps) => {
+const ProductCard: FC<ProductCardProps> = ({ product, category, key }) => {
 
     const dispatch = useDispatch()
     const {name, price, imageUrl, id} = product;
