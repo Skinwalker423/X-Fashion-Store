@@ -1,4 +1,4 @@
-import CheckoutItems from "../../components/checkout-item/checkout-item-component";
+import CheckoutItems from "../../components/checkout-items/checkout-items-component";
 import { CheckoutContainer, CheckoutHeader, HeaderBlock, PaymentButton  } from "./checkout-styles";
 import { Link } from "react-router-dom";
 
