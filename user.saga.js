@@ -1,15 +1,15 @@
 import { call, all, takeLatest, put } from "redux-saga/effects";
 import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword, getCurrentUser, signInWithGooglePopup, signInAuthUserWithEmailAndPassword,signOutUser, auth } from "../../utils/firebase/firebase-utils";
 import { USER_ACTION_TYPES } from "./user.types";
-import { signInSuccess, signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed } from "./user.action";
+import { signInSuccess, signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed } from "./user.action.ts";
 
 
 export function* createSnapshotFromUserAuth(userAuth, additionalDetails){
     try{
         const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
-        yield put(signInSuccess({...userSnapshot.data(), id: userSnapshot.id}));
+        yield* put(signInSuccess({...userSnapshot.data(), id: userSnapshot.id}));
     }catch(error){
-        yield put(signInFailed);
+        yield* put(signInFailed);
         console.log('problem creating user', error.message);
     }
 }

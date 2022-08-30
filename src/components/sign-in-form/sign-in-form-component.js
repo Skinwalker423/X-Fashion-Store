@@ -82,8 +82,8 @@ const SignInForm = () => {
                     required
                 />
                 <ButtonsContainer>
-                    <Button type='submit' title={'Sign in with Email'} />
-                    <Button type='button' title={'Sign in with Google'} onClickHandler={logInGoogleUser} theme={BUTTON_THEME.google} />
+                    <Button type='submit' title='Sign in with Email' />
+                    <Button type='button' title='Sign in with Google' onClick={logInGoogleUser} theme={BUTTON_THEME.google} />
                 </ButtonsContainer>  
             </SignInFormContainer>
     )

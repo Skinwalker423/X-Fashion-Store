@@ -79,14 +79,15 @@ export const createAuthUserWithEmailAndPassword = async(email: string, password:
 }
 
 
-export const  onAuthStateChangedListener = (callback) => {
+export const  onAuthStateChangedListener = (callback: NextOrObserver<User>) => {
     if(!callback){
       return;
     }
     onAuthStateChanged(auth, callback)
 }
 
-export const getCurrentUser = () => {
+export const getCurrentUser = (): Promise<User | null> => {
+
   return new Promise((resolve, reject) => {
       const unsubscribe = onAuthStateChanged(
         auth, 
@@ -98,9 +99,13 @@ export const getCurrentUser = () => {
       );
   })
 }
-
-
 export const addCollectionAndDocuments = async(collectionKey: string, objectsToAdd) => {
+=======
+export type ObjectToAdd = {
+  title: string;
+}
+
+export const addCollectionAndDocuments = async<T extends ObjectToAdd>(collectionKey: string, objectsToAdd: T[]): Promise<void> => {
     const collectionRef = collection(db, collectionKey);
     const batch = writeBatch(db);
 
@@ -112,6 +117,8 @@ export const addCollectionAndDocuments = async(collectionKey: string, objectsToA
 }
 
 export const getCategoriesAndDocuments = async() => {
+=======
+export const getCategoriesAndDocuments = async(): Promise<Category[]> => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
 
@@ -120,6 +127,15 @@ export const getCategoriesAndDocuments = async() => {
     return querySnapshot.docs.map((docSnapShop) => docSnapShop.data() as Category);
 }
 
+export type AdditionalInformation = {
+  displayName?: string;
+}
+
+export type UserData = {
+  displayName: string;
+  createdAt: Date;
+  email: string;
+}
 
 export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails = {} as AdditionalInformation) : Promise<void | QueryDocumentSnapshot<UserData>> => {
     const userDocRef = doc(db, 'users', userAuth.uid);
@@ -146,7 +162,7 @@ export const createUserDocumentFromAuth = async(userAuth: User, additionalDetail
       }
     }
 
-    return userSnapshot;
+    return userSnapshot as QueryDocumentSnapshot<UserData>;
 
 }
 
