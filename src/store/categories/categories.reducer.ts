@@ -15,7 +15,7 @@ const CATEGORIES_INITIAL_STATE: CategoriesState = {
     error: null
 }
 
-const categoriesReducer = (state = CATEGORIES_INITIAL_STATE, action: AnyAction) : CategoriesState => {
+const categoriesReducer = (state = CATEGORIES_INITIAL_STATE, action: AnyAction) => {
 
     if(fetchCategoriesStart.match(action)) {
         return {...state, isLoading: true}
