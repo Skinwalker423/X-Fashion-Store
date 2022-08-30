@@ -6,6 +6,7 @@ import { RootState } from "../store";
 const selectCategoryReducer = (state: RootState) : CategoriesState => state.categories;
 
 
+
 export const selectCategories = createSelector([selectCategoryReducer], (categoriesSlice) => {
     return categoriesSlice.categories;
 })

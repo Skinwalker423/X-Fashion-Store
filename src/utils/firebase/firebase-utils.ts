@@ -87,6 +87,7 @@ export const  onAuthStateChangedListener = (callback: NextOrObserver<User>) => {
 }
 
 export const getCurrentUser = (): Promise<User | null> => {
+
   return new Promise((resolve, reject) => {
       const unsubscribe = onAuthStateChanged(
         auth, 
@@ -98,7 +99,8 @@ export const getCurrentUser = (): Promise<User | null> => {
       );
   })
 }
-
+export const addCollectionAndDocuments = async(collectionKey: string, objectsToAdd) => {
+=======
 export type ObjectToAdd = {
   title: string;
 }
@@ -114,6 +116,8 @@ export const addCollectionAndDocuments = async<T extends ObjectToAdd>(collection
     await batch.commit();
 }
 
+export const getCategoriesAndDocuments = async() => {
+=======
 export const getCategoriesAndDocuments = async(): Promise<Category[]> => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
