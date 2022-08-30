@@ -1,5 +1,5 @@
 import { Category } from "./categories.types";
-import { fetchCategoriesFail, fetchCategoriesStart, fetchCategoriesSuccess, CategoryAction } from "./categories.action";
+import { fetchCategoriesFail, fetchCategoriesStart, fetchCategoriesSuccess } from "./categories.action";
 import { AnyAction } from "redux";
 
 
