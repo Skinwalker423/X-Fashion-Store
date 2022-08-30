@@ -13,7 +13,7 @@ export function* fetchCategoriesAsync(){
         yield* put(fetchCategoriesSuccess(categoriesArray));
     
     }catch(error){
-        yield* put(fetchCategoriesFail(error))
+        yield* put(fetchCategoriesFail(error as Error))
     }
 }
 
