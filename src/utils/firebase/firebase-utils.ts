@@ -87,7 +87,6 @@ export const  onAuthStateChangedListener = (callback: NextOrObserver<User>) => {
 }
 
 export const getCurrentUser = (): Promise<User | null> => {
-
   return new Promise((resolve, reject) => {
       const unsubscribe = onAuthStateChanged(
         auth, 
@@ -99,13 +98,13 @@ export const getCurrentUser = (): Promise<User | null> => {
       );
   })
 }
-export const addCollectionAndDocuments = async(collectionKey: string, objectsToAdd) => {
-=======
-export type ObjectToAdd = {
+
+export type ObjectsToAdd = {
   title: string;
 }
 
-export const addCollectionAndDocuments = async<T extends ObjectToAdd>(collectionKey: string, objectsToAdd: T[]): Promise<void> => {
+
+export const addCollectionAndDocuments = async<T extends ObjectsToAdd>(collectionKey: string, objectsToAdd: T[]): Promise<void> => {
     const collectionRef = collection(db, collectionKey);
     const batch = writeBatch(db);
 
@@ -117,8 +116,6 @@ export const addCollectionAndDocuments = async<T extends ObjectToAdd>(collection
 }
 
 export const getCategoriesAndDocuments = async() => {
-=======
-export const getCategoriesAndDocuments = async(): Promise<Category[]> => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
 
@@ -132,10 +129,11 @@ export type AdditionalInformation = {
 }
 
 export type UserData = {
-  displayName: string;
   createdAt: Date;
+  displayName: string;
   email: string;
 }
+
 
 export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails = {} as AdditionalInformation) : Promise<void | QueryDocumentSnapshot<UserData>> => {
     const userDocRef = doc(db, 'users', userAuth.uid);
@@ -154,7 +152,8 @@ export const createUserDocumentFromAuth = async(userAuth: User, additionalDetail
         await setDoc(userDocRef, {
           displayName,
           email,
-          createdAt
+          createdAt,
+          ...additionalDetails,
         })
 
       }catch(e){
