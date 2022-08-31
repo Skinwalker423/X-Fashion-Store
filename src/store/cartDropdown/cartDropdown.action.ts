@@ -4,7 +4,7 @@ import { CategoryItem } from "../categories/categories.types";
 
 
 
-const addCartItem = (cartItems, productToAdd) => {
+const addCartItem = (cartItems: CartItem[], productToAdd: CartItem) => {
         const foundItem = cartItems.find(item => item.id === productToAdd.id);
         if(foundItem){
             return cartItems.map(item =>
@@ -14,7 +14,7 @@ const addCartItem = (cartItems, productToAdd) => {
         }
         return [...cartItems, {...productToAdd, qty: 1}]
     }
-const removeCartItem = (cartItems, productToRemove) => {
+const removeCartItem = (cartItems: CartItem[], productToRemove: CartItem) => {
 
     const foundItem = cartItems.find(item => item.id === productToRemove.id);
 
@@ -34,7 +34,7 @@ const removeCartItem = (cartItems, productToRemove) => {
 
     return [...cartItems]
 }
-const cancelCartItem = (cartItems, productToCancel) => {
+const cancelCartItem = (cartItems: CartItem[], productToCancel: CartItem) => {
 
     const foundItem = cartItems.find(item => item.id === productToCancel.id);
 
@@ -50,38 +50,34 @@ const cancelCartItem = (cartItems, productToCancel) => {
 
 
 
-export const setCartDropdownDisplayed = withMatcher((isDisplayed => {
+export const setCartDropdownDisplayed = withMatcher((isDisplayed: boolean) => {
     return createAction(ACTION_TYPES.SET_CARTDROPDOWN_DISPLAY, isDisplayed);
         
     })
 
-export const setTotalQuanityInCart = withMatcher((totalQuantity) => {
+export const setTotalQuanityInCart = withMatcher((totalQuantity: number) => {
     return createAction(ACTION_TYPES.SET_TOTAL_QTY, totalQuantity);
 })
 
-export const setTotalPrice = withMatcher((totals) => {
+export const setTotalPrice = withMatcher((totals: number) => {
     return createAction(ACTION_TYPES.SET_TOTAL_PRICE, totals);
 })
 
-export const setCartItems = withMatcher((newCartItems) => {
+export const setCartItems = withMatcher((newCartItems: CartItem[]) => {
     return createAction(ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 
 })
 
-export const incrementItem = (cartItems, item) => {
+export const incrementItem = (cartItems: CartItem[], item: CartItem) => {
     const newCartItems = addCartItem(cartItems, item);
     return createAction(ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 }
-export const decrementItem = (cartItems, item) => {
+export const decrementItem = (cartItems: CartItem[], item: CartItem) => {
     const newCartItems = removeCartItem(cartItems, item);
     return createAction(ACTION_TYPES.SET_CART_ITEMS, newCartItems);                             
 }
-export const cancelItemAndRemoveFromCart = (cartItems, item) => {
+export const cancelItemAndRemoveFromCart = (cartItems: CartItem[], item: CartItem) => {
     const newCartItems = cancelCartItem(cartItems, item);
     return createAction(ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 }
-
-//     return createAction(ACTION_TYPES.SET_CART_ITEMS, { cartItems: newCartItems, totalQuanityInCart: totalQuantity, totalPrice: totals });
-        
-//     }
 

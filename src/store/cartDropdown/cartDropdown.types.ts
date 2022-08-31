@@ -7,8 +7,6 @@ export enum ACTION_TYPES {
     SET_TOTAL_PRICE = 'SET_TOTAL_PRICE'
 }
 
-
-
 export type CartItem = CategoryItem & {
     qty: number;
 }
