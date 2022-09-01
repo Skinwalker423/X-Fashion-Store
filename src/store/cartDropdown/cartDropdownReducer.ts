@@ -2,7 +2,12 @@ import { CartItem } from "./cartDropdown.types";
 import { AnyAction } from "redux";
 import { setCartDropdownDisplayed, setCartItems, setTotalPrice, setTotalQuanityInCart } from "./cartDropdown.action";
 
-
+export type CartState = {
+    cartDropdownDisplayed?: boolean;
+    cartItems: CartItem[];
+    totalQuantityInCart: number;
+    totalPrice: number;
+}
 
 const CART_INITIAL_STATE : CartState = {
     cartDropdownDisplayed: false,
@@ -12,7 +17,7 @@ const CART_INITIAL_STATE : CartState = {
 
 }
 
-export const cartDropdownReducer = (state = CART_INITIAL_STATE, action) => {
+export const cartDropdownReducer = (state = CART_INITIAL_STATE, action: AnyAction) => {
 
     if(setCartDropdownDisplayed.match(action)){
         return {...state, cartDropdownDisplayed: action.payload}
