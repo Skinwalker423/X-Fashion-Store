@@ -17,7 +17,7 @@ const CART_INITIAL_STATE : CartState = {
 
 }
 
-export const cartDropdownReducer = (state = CART_INITIAL_STATE, action: AnyAction) => {
+export const cartDropdownReducer = (state = CART_INITIAL_STATE, action: AnyAction): CartState => {
 
     if(setCartDropdownDisplayed.match(action)){
         return {...state, cartDropdownDisplayed: action.payload}
