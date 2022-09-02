@@ -125,7 +125,7 @@ export const getCategoriesAndDocuments = async(): Promise<Category[]> => {
     return querySnapshot.docs.map((docSnapShop) => docSnapShop.data() as Category);
 }
 
-export type AdditionalDetails = {
+export type AdditionalInformation = {
     displayName?: string;
 }
 
@@ -135,8 +135,7 @@ export type UserData = {
   email: string;
 }
 
-export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails = {} as AdditionalInformation) : Promise<void | QueryDocumentSnapshot<UserData>> => {
-
+export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails: AdditionalInformation): Promise<void | QueryDocumentSnapshot<UserData>> => {
     const userDocRef = doc(db, 'users', userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
