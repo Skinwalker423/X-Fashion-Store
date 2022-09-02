@@ -12,13 +12,13 @@ export type FetchCategoriesFail = ActionWithPayload<CATEGORIES_ACTION_TYPES.FETC
 
 
 
-
-export const fetchCategoriesStart = withMatcher(() : FetchCategoriesStart => {
+export const fetchCategoriesStart = withMatcher((): FetchCategoriesStart => {
     return createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START)
 })
-export const fetchCategoriesSuccess = withMatcher((categoriesArray : Category[]) : FetchCategoriesSuccess => {
+
+export const fetchCategoriesSuccess = withMatcher((categoriesArray: Category[]): FetchCategoriesSuccess => {
     return createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, categoriesArray)
 })
-export const fetchCategoriesFail = withMatcher((error: Error) : FetchCategoriesFail => {
+export const fetchCategoriesFail = withMatcher((error: Error): FetchCategoriesFail => {
     return createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAIL, error)
 })
