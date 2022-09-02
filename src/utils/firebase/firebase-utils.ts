@@ -135,7 +135,8 @@ export type UserData = {
   email: string;
 }
 
-export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails: AdditionalDetails): Promise<QueryDocumentSnapshot<UserData> | void> => {
+export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails = {} as AdditionalInformation) : Promise<void | QueryDocumentSnapshot<UserData>> => {
+
     const userDocRef = doc(db, 'users', userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);

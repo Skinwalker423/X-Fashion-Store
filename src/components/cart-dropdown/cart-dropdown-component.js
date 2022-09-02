@@ -22,7 +22,7 @@ const CartDropdown = () => {
         <CartDropDownContainer>
             <CartItems />
             <ButtonLink to='/checkout'>
-                <Button title='checkout' onClickHandler={closeDropdownCartOnCheckout} />
+                <Button title='checkout' onClick={closeDropdownCartOnCheckout} />
             </ButtonLink>
         </CartDropDownContainer>
     )
