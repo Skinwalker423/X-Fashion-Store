@@ -115,7 +115,8 @@ export const addCollectionAndDocuments = async<T extends ObjectsToAdd>(collectio
     await batch.commit();
 }
 
-export const getCategoriesAndDocuments = async() => {
+
+export const getCategoriesAndDocuments = async(): Promise<Category[]> => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
 
@@ -124,8 +125,8 @@ export const getCategoriesAndDocuments = async() => {
     return querySnapshot.docs.map((docSnapShop) => docSnapShop.data() as Category);
 }
 
-export type AdditionalInformation = {
-  displayName?: string;
+export type AdditionalDetails = {
+    displayName?: string;
 }
 
 export type UserData = {
@@ -134,8 +135,8 @@ export type UserData = {
   email: string;
 }
 
-
 export const createUserDocumentFromAuth = async(userAuth: User, additionalDetails = {} as AdditionalInformation) : Promise<void | QueryDocumentSnapshot<UserData>> => {
+
     const userDocRef = doc(db, 'users', userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
