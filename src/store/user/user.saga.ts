@@ -9,12 +9,12 @@ export function* createSnapshotFromUserAuth(userAuth: User, additionalDetails?: 
     try{
         const userSnapshot = yield* call(createUserDocumentFromAuth, userAuth, additionalDetails);
         if(userSnapshot){
-            yield* put(signInSuccess({...userSnapshot.data(), id: userSnapshot.id}));
+            yield* put(signInSuccess({id: userSnapshot.id, ...userSnapshot.data()}));
             console.log(userSnapshot.data());
         }
     }catch(error){
         yield* put(signInFailed);
-        console.log('problem creating user', error as Error);
+        console.log('problem creating user', error);
     }
 }
 
@@ -73,6 +73,7 @@ export function* logOutUser(){
 export function* signInAfterSignUp({payload: {user, additionalDetails}}: SignUpAndSignInSuccess){   
     yield* call(createSnapshotFromUserAuth, user, additionalDetails)
 }
+
 
 export function* createUserWithEmailPassword({payload: {email, password, displayName}}: CreateUserStart){
 
