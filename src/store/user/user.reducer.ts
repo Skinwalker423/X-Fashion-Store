@@ -1,4 +1,4 @@
-import { signInFailed, signUpAndSignInFailed, signUpAndSignInSuccess, userLogOutFailed, userLogOutStart } from "./user.action";
+import { signInFailed, signUpAndSignInFailed, signUpAndSignInSuccess, userLogOutFailed, userLogOutStart } from "./user.actions";
 import { AnyAction } from "redux";
 import { User } from "firebase/auth";
 
