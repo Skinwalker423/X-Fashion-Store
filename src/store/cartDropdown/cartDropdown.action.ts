@@ -1,6 +1,5 @@
 import { ACTION_TYPES, CartItem } from "./cartDropdown.types";
 import { createAction, ActionWithPayload, withMatcher } from "../../utils/reducer/createAction";
-import { CategoryItem } from "../categories/categories.types";
 
 
 

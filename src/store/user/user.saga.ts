@@ -5,11 +5,11 @@ import { USER_ACTION_TYPES } from "./user.types";
 import {signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed, EmailSignInStart, SignUpAndSignInSuccess, CreateUserStart, signInSuccess } from "./user.action";
 
 
-export function* createSnapshotFromUserAuth(userAuth, additionalDetails){
+export function* createSnapshotFromUserAuth(userAuth: User, additionalDetails?: AdditionalInformation){
     try{
         const userSnapshot = yield* call(createUserDocumentFromAuth, userAuth, additionalDetails);
         if(userSnapshot){
-            yield* put(signInSuccess({...userSnapshot.data(), id: userSnapshot.id}));
+            yield* put(signInSuccess({id: userSnapshot.id, ...userSnapshot.data()}));
             console.log(userSnapshot.data());
         }
     }catch(error){
@@ -26,12 +26,12 @@ export function* isUserAuthenticated(){
         }
         yield* call(createSnapshotFromUserAuth, userAuth);
     }catch(error){
-        yield* put(signInFailed(error))
+        yield* put(signInFailed(error as Error))
     }
 }
 
 
-export function* emailSignInUserAsync({payload: {email, password}}){
+export function* emailSignInUserAsync({payload: {email, password}}: EmailSignInStart){
 
     try{
         const userCredential = yield* call(signInAuthUserWithEmailAndPassword, email, password);
@@ -55,7 +55,7 @@ export function* googleSignInUserAsync() {
             yield* call(createSnapshotFromUserAuth, user);
         }
     }catch(error){
-        yield* put(signInFailed(error));
+        yield* put(signInFailed(error as Error));
     }
 }
 
@@ -66,15 +66,16 @@ export function* logOutUser(){
         
 
     }catch(error){
-        yield* put(userLogOutFailed(error))
+        yield* put(userLogOutFailed(error as Error))
     }
 }
 
-export function* signInAfterSignUp({payload: {user, additionalDetails}}){   
+export function* signInAfterSignUp({payload: {user, additionalDetails}}: SignUpAndSignInSuccess){   
     yield* call(createSnapshotFromUserAuth, user, additionalDetails)
 }
 
-export function* createUserWithEmailPassword({payload: {email, password, displayName}}){
+
+export function* createUserWithEmailPassword({payload: {email, password, displayName}}: CreateUserStart){
 
         try {
             const userCredential = yield* call(createAuthUserWithEmailAndPassword, email, password);
@@ -84,7 +85,7 @@ export function* createUserWithEmailPassword({payload: {email, password, display
             }
 
         } catch (error) {
-           yield* put(signUpAndSignInFailed(error));
+           yield* put(signUpAndSignInFailed(error as Error));
         }
 }
 
