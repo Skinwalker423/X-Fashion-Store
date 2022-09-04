@@ -1,9 +1,10 @@
 import { signInFailed, signUpAndSignInFailed, signUpAndSignInSuccess, userLogOutFailed, userLogOutStart } from "./user.actions";
 import { AnyAction } from "redux";
 import { User } from "firebase/auth";
+import { UserData } from "../../utils/firebase/firebase-utils";
 
 export type UserState = {
-    readonly currentUser: User | null;
+    readonly currentUser: UserData | null;
     readonly isLoading: boolean;
     readonly error: Error | null;
 }
