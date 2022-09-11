@@ -15,6 +15,13 @@ export const LogoContainer = styled(Link)`
         height: 100%;
         width: 70px;
         padding: 25px;
+        
+        @media and screen (max-width: 800px){
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
 `
 
@@ -26,7 +33,7 @@ export const NavLinkContainer = styled.div`
         align-items: center;
         justify-content: flex-end;
 
-        @media (max-width: 500px) {
+        @media screen and (max-width: 500px) {
             width: 75%
         }
 
