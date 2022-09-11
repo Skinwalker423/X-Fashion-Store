@@ -5,7 +5,6 @@ import { PaymentFormStyle, CardElementStyle, FormContainer, PaymentButton } from
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectTotalPrice } from "../../store/cartDropdown/cartDropdown.selector";
-import { useNavigate } from "react-router-dom";
 import { StripeCardElement } from "@stripe/stripe-js";
 
 const ifValidCardElement = (

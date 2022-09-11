@@ -9,7 +9,7 @@ import { selectCartDisplayed } from "../../store/cartDropdown/cartDropdown.selec
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentPath } from "../../store/currentPath/currentPath.acton";
-import { userLogOutStart, userLogOutFailed } from "../../store/user/user.action";
+import { userLogOutStart, userLogOutFailed } from "../../store/user/user.actions";
 import {ReactComponent as CrownLogo} from '../../assets/crown.svg';
 
 

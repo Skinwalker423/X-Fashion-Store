@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "../form-input/form-input-component";
 import Button, {BUTTON_THEME} from "../button/button-component";
 import { SignInFormContainer, ButtonsContainer } from "./sign-in-form-styles";
-import { signInFailed, googleSignInStart, emailSignInStart } from "../../store/user/user.action";
+import { signInFailed, googleSignInStart, emailSignInStart } from "../../store/user/user.actions";
 import { useDispatch } from "react-redux/es/exports";
 
 

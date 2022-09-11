@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserStart, signUpAndSignInFailed } from "../../store/user/user.action";
+import { createUserStart, signUpAndSignInFailed } from "../../store/user/user.actions";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
 import { selectCurrentPath } from "../../store/currentPath/currentPath.selector";
 import { useNavigate } from "react-router-dom";
