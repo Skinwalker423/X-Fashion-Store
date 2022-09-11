@@ -24,7 +24,7 @@ const Checkout = () => {
                 </HeaderBlock>
             </CheckoutHeader>
             <CheckoutItems />
-            <Link to={'/payment'}>
+            <Link style={{width: '100%'}} to={'/payment'}>
                 <PaymentButton title={'Pay Now'} />
             </Link>
         </CheckoutContainer>

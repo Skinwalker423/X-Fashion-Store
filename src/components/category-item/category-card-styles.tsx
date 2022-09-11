@@ -69,8 +69,9 @@ export const CategoryContainer = styled.div`
     margin-left: 7.5px;
   }
 
-  @media (max-width: 500px) {
+  @media screen and (max-width: 800px) {
       flex-direction: column;
       width: 100%;
+      height: 200px;
   }
 `

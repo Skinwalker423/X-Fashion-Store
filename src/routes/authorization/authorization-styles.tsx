@@ -2,9 +2,12 @@ import styled from "styled-components";
 
 export const AuthorizationFormsContainer = styled.div` 
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+
     .sign-in-form {
         display: flex;
         flex-direction: column;

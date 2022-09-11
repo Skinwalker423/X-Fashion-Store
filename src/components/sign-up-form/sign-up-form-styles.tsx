@@ -4,13 +4,17 @@ export const SignUpContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 380px;
-    margin-left: 50px;
+    margin-left: 0px;
     
     
-    @media (max-width: 500px) {
+    @media screen and (max-width: 800px) {
         .sign-up-container{
-            width: 100%;
+            width: 70%;
             margin: 50px;
+            padding: 10px;
+        }
+        Button{
+            width: 100%;
         }
     }
     
