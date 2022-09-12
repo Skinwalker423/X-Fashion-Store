@@ -1,5 +1,5 @@
 import { ShopCategoryListContainer, CategoryTitle, CatProdCont } from "./shop-products-list-styles";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, FC} from "react";
 import ProductCard from '../products-card/product-card-component';
 import { selectCategoriesMap, selectIsLoading } from "../../store/categories/categories.selector";
 import { useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import Spinner from "../spinner/spinner-component";
 import { CategoryRouteParams } from "../../routes/categories/categories-component";
 
 
-const ShopCategoryList = ({category}: CategoryRouteParams) => {
+const ShopCategoryList: FC<CategoryRouteParams> = ({category}) => {
 
     const categoriesMap = useSelector(selectCategoriesMap);
     const isLoading = useSelector(selectIsLoading);

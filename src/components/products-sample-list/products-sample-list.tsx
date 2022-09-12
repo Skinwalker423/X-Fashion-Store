@@ -1,13 +1,13 @@
 import React from "react";
 import ProductCard from "../products-card/product-card-component";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
 import { selectCategoriesMap, selectIsLoading } from "../../store/categories/categories.selector";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Spinner from "../spinner/spinner-component";
 
+import { CategoriesSampleContainer, ProductTitle, ProductsContainer} from "./products-sample-list-styles";
 
-import { CategoriesSampleContainer, ProductTitle, ProductsContainer } from "./products-sample-list-styles";
 
 const ProductsSampleList = () => {
 
